@@ -1,5 +1,6 @@
 import argparse
-from scan_files import scan_device
+from scan_files import scan_device, set_ip_and_port
+from cryptography.fernet import Fernet
 
 server_IP = None
 server_port = None
@@ -28,6 +29,7 @@ def main():
     if server_port < 0 or server_port > 65535:
         return   
     
+    set_ip_and_port(server_IP, server_port)
     scan_device()
 
 if __name__ == "__main__":
