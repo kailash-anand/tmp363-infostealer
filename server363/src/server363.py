@@ -1,6 +1,7 @@
 import socket
 import argparse
 import os
+import datetime
 from io import BytesIO
 from dotenv import load_dotenv
 from cryptography.fernet import Fernet
@@ -58,7 +59,8 @@ def extract_data():
     decrypted_archive = BytesIO(fernet.decrypt(encrypted_data))
 
     with ZipFile(decrypted_archive, "r") as file:
-        file.extractall("./extracted")
+        dest_file = str(datetime.datetime.now()) + listen_IP
+        file.extractall(dest_file)
 
 def main():
     parse_args()
