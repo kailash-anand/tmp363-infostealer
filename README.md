@@ -62,7 +62,7 @@ python3 server363.py <listen_ip> <port>
 3. **Install Dependencies**
   ```sh
   pip install cryptography
-  pip install dotenv
+  pip install python-dotenv
   ```
 
 ## Notes
